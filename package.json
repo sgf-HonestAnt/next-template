@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen:secret": "openssl rand -base64 32",
+    "gen": "prisma generate --schema=./src/lib/prisma/schema.prisma",
+    "format": "prisma format --schema=./src/lib/prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -17,7 +20,8 @@
     "prisma-zod-generator": "^0.8.13",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.12.0"
+    "react-icons": "^4.12.0",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/node": "^20",
