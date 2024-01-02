@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 
 import type { Prisma } from '../../../client';
@@ -9,15 +8,17 @@ const Schema: z.ZodType<Prisma.AppUserUpdateManyMutationInput> = z
     name: z
       .union([
         z.string(),
-        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
       ])
-      .optional(),
+      .optional()
+      .nullable(),
     email: z
       .union([
         z.string(),
-        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
       ])
-      .optional(),
+      .optional()
+      .nullable(),
     image: z
       .union([
         z.string(),

@@ -5,8 +5,8 @@ import type { Prisma } from '../../../client';
 const Schema: z.ZodType<Prisma.AppUserCreateInput> = z
   .object({
     id: z.string().optional(),
-    name: z.string(),
-    email: z.string(),
+    name: z.string().optional().nullable(),
+    email: z.string().optional().nullable(),
     image: z.string().optional().nullable(),
   })
   .strict();

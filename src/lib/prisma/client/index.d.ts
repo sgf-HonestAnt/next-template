@@ -1943,8 +1943,8 @@ export namespace Prisma {
 
   export type AppUserGroupByOutputType = {
     id: string
-    name: string
-    email: string
+    name: string | null
+    email: string | null
     image: string | null
     _count: AppUserCountAggregateOutputType | null
     _min: AppUserMinAggregateOutputType | null
@@ -1985,8 +1985,8 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
-      email: string
+      name: string | null
+      email: string | null
       image: string | null
     }, ExtArgs["result"]["appUser"]>
     composites: {}
@@ -2589,7 +2589,7 @@ export namespace Prisma {
     /**
      * The data needed to create a AppUser.
      */
-    data: XOR<AppUserCreateInput, AppUserUncheckedCreateInput>
+    data?: XOR<AppUserCreateInput, AppUserUncheckedCreateInput>
   }
 
 
@@ -2851,8 +2851,8 @@ export namespace Prisma {
     OR?: AppUserWhereInput[]
     NOT?: AppUserWhereInput | AppUserWhereInput[]
     id?: StringFilter<"AppUser"> | string
-    name?: StringFilter<"AppUser"> | string
-    email?: StringFilter<"AppUser"> | string
+    name?: StringNullableFilter<"AppUser"> | string | null
+    email?: StringNullableFilter<"AppUser"> | string | null
     image?: StringNullableFilter<"AppUser"> | string | null
   }
 
@@ -2869,7 +2869,7 @@ export namespace Prisma {
     AND?: AppUserWhereInput | AppUserWhereInput[]
     OR?: AppUserWhereInput[]
     NOT?: AppUserWhereInput | AppUserWhereInput[]
-    name?: StringFilter<"AppUser"> | string
+    name?: StringNullableFilter<"AppUser"> | string | null
     image?: StringNullableFilter<"AppUser"> | string | null
   }, "id" | "email">
 
@@ -2888,8 +2888,8 @@ export namespace Prisma {
     OR?: AppUserScalarWhereWithAggregatesInput[]
     NOT?: AppUserScalarWhereWithAggregatesInput | AppUserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AppUser"> | string
-    name?: StringWithAggregatesFilter<"AppUser"> | string
-    email?: StringWithAggregatesFilter<"AppUser"> | string
+    name?: StringNullableWithAggregatesFilter<"AppUser"> | string | null
+    email?: StringNullableWithAggregatesFilter<"AppUser"> | string | null
     image?: StringNullableWithAggregatesFilter<"AppUser"> | string | null
   }
 
@@ -2933,46 +2933,46 @@ export namespace Prisma {
 
   export type AppUserCreateInput = {
     id?: string
-    name: string
-    email: string
+    name?: string | null
+    email?: string | null
     image?: string | null
   }
 
   export type AppUserUncheckedCreateInput = {
     id?: string
-    name: string
-    email: string
+    name?: string | null
+    email?: string | null
     image?: string | null
   }
 
   export type AppUserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AppUserUncheckedUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AppUserCreateManyInput = {
     id?: string
-    name: string
-    email: string
+    name?: string | null
+    email?: string | null
     image?: string | null
   }
 
   export type AppUserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AppUserUncheckedUpdateManyInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

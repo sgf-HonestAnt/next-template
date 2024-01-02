@@ -26,11 +26,13 @@ const Schema: z.ZodType<Prisma.AppUserWhereInput> = z
       .union([z.lazy(() => StringFilterObjectSchema), z.string()])
       .optional(),
     name: z
-      .union([z.lazy(() => StringFilterObjectSchema), z.string()])
-      .optional(),
+      .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
+      .optional()
+      .nullable(),
     email: z
-      .union([z.lazy(() => StringFilterObjectSchema), z.string()])
-      .optional(),
+      .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
+      .optional()
+      .nullable(),
     image: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
       .optional()
