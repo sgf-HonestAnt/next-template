@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Example = $Result.DefaultSelection<Prisma.$ExamplePayload>
+/**
+ * Model AppUser
+ * 
+ */
+export type AppUser = $Result.DefaultSelection<Prisma.$AppUserPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -118,6 +123,16 @@ export class PrismaClient<
     * ```
     */
   get example(): Prisma.ExampleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.appUser`: Exposes CRUD operations for the **AppUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AppUsers
+    * const appUsers = await prisma.appUser.findMany()
+    * ```
+    */
+  get appUser(): Prisma.AppUserDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -588,7 +603,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Example: 'Example'
+    Example: 'Example',
+    AppUser: 'AppUser'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -605,7 +621,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'example'
+      modelProps: 'example' | 'appUser'
       txIsolationLevel: never
     },
     model: {
@@ -680,6 +696,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ExampleCountArgs<ExtArgs>,
             result: $Utils.Optional<ExampleCountAggregateOutputType> | number
+          }
+        }
+      }
+      AppUser: {
+        payload: Prisma.$AppUserPayload<ExtArgs>
+        fields: Prisma.AppUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AppUserFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AppUserFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          findFirst: {
+            args: Prisma.AppUserFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AppUserFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          findMany: {
+            args: Prisma.AppUserFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>[]
+          }
+          create: {
+            args: Prisma.AppUserCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          createMany: {
+            args: Prisma.AppUserCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.AppUserDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          update: {
+            args: Prisma.AppUserUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.AppUserDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AppUserUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.AppUserUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AppUserPayload>
+          }
+          aggregate: {
+            args: Prisma.AppUserAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateAppUser>
+          }
+          groupBy: {
+            args: Prisma.AppUserGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<AppUserGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.AppUserFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.AppUserAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.AppUserCountArgs<ExtArgs>,
+            result: $Utils.Optional<AppUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1725,6 +1815,921 @@ export namespace Prisma {
 
 
   /**
+   * Model AppUser
+   */
+
+  export type AggregateAppUser = {
+    _count: AppUserCountAggregateOutputType | null
+    _min: AppUserMinAggregateOutputType | null
+    _max: AppUserMaxAggregateOutputType | null
+  }
+
+  export type AppUserMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+  }
+
+  export type AppUserMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+  }
+
+  export type AppUserCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    image: number
+    _all: number
+  }
+
+
+  export type AppUserMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+  }
+
+  export type AppUserMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+  }
+
+  export type AppUserCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+    _all?: true
+  }
+
+  export type AppUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppUser to aggregate.
+     */
+    where?: AppUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppUsers to fetch.
+     */
+    orderBy?: AppUserOrderByWithRelationInput | AppUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AppUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AppUsers
+    **/
+    _count?: true | AppUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AppUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AppUserMaxAggregateInputType
+  }
+
+  export type GetAppUserAggregateType<T extends AppUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateAppUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAppUser[P]>
+      : GetScalarType<T[P], AggregateAppUser[P]>
+  }
+
+
+
+
+  export type AppUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AppUserWhereInput
+    orderBy?: AppUserOrderByWithAggregationInput | AppUserOrderByWithAggregationInput[]
+    by: AppUserScalarFieldEnum[] | AppUserScalarFieldEnum
+    having?: AppUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AppUserCountAggregateInputType | true
+    _min?: AppUserMinAggregateInputType
+    _max?: AppUserMaxAggregateInputType
+  }
+
+  export type AppUserGroupByOutputType = {
+    id: string
+    name: string
+    email: string
+    image: string | null
+    _count: AppUserCountAggregateOutputType | null
+    _min: AppUserMinAggregateOutputType | null
+    _max: AppUserMaxAggregateOutputType | null
+  }
+
+  type GetAppUserGroupByPayload<T extends AppUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AppUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AppUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AppUserGroupByOutputType[P]>
+            : GetScalarType<T[P], AppUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AppUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["appUser"]>
+
+  export type AppUserSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+  }
+
+
+  export type $AppUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AppUser"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      email: string
+      image: string | null
+    }, ExtArgs["result"]["appUser"]>
+    composites: {}
+  }
+
+
+  type AppUserGetPayload<S extends boolean | null | undefined | AppUserDefaultArgs> = $Result.GetResult<Prisma.$AppUserPayload, S>
+
+  type AppUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AppUserFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: AppUserCountAggregateInputType | true
+    }
+
+  export interface AppUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AppUser'], meta: { name: 'AppUser' } }
+    /**
+     * Find zero or one AppUser that matches the filter.
+     * @param {AppUserFindUniqueArgs} args - Arguments to find a AppUser
+     * @example
+     * // Get one AppUser
+     * const appUser = await prisma.appUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends AppUserFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserFindUniqueArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one AppUser that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {AppUserFindUniqueOrThrowArgs} args - Arguments to find a AppUser
+     * @example
+     * // Get one AppUser
+     * const appUser = await prisma.appUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends AppUserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first AppUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserFindFirstArgs} args - Arguments to find a AppUser
+     * @example
+     * // Get one AppUser
+     * const appUser = await prisma.appUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends AppUserFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserFindFirstArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first AppUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserFindFirstOrThrowArgs} args - Arguments to find a AppUser
+     * @example
+     * // Get one AppUser
+     * const appUser = await prisma.appUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends AppUserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more AppUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AppUsers
+     * const appUsers = await prisma.appUser.findMany()
+     * 
+     * // Get first 10 AppUsers
+     * const appUsers = await prisma.appUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const appUserWithIdOnly = await prisma.appUser.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends AppUserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a AppUser.
+     * @param {AppUserCreateArgs} args - Arguments to create a AppUser.
+     * @example
+     * // Create one AppUser
+     * const AppUser = await prisma.appUser.create({
+     *   data: {
+     *     // ... data to create a AppUser
+     *   }
+     * })
+     * 
+    **/
+    create<T extends AppUserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserCreateArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many AppUsers.
+     *     @param {AppUserCreateManyArgs} args - Arguments to create many AppUsers.
+     *     @example
+     *     // Create many AppUsers
+     *     const appUser = await prisma.appUser.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends AppUserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a AppUser.
+     * @param {AppUserDeleteArgs} args - Arguments to delete one AppUser.
+     * @example
+     * // Delete one AppUser
+     * const AppUser = await prisma.appUser.delete({
+     *   where: {
+     *     // ... filter to delete one AppUser
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends AppUserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserDeleteArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one AppUser.
+     * @param {AppUserUpdateArgs} args - Arguments to update one AppUser.
+     * @example
+     * // Update one AppUser
+     * const appUser = await prisma.appUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends AppUserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserUpdateArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more AppUsers.
+     * @param {AppUserDeleteManyArgs} args - Arguments to filter AppUsers to delete.
+     * @example
+     * // Delete a few AppUsers
+     * const { count } = await prisma.appUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends AppUserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AppUserDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AppUsers
+     * const appUser = await prisma.appUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends AppUserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AppUser.
+     * @param {AppUserUpsertArgs} args - Arguments to update or create a AppUser.
+     * @example
+     * // Update or create a AppUser
+     * const appUser = await prisma.appUser.upsert({
+     *   create: {
+     *     // ... data to create a AppUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AppUser we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends AppUserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, AppUserUpsertArgs<ExtArgs>>
+    ): Prisma__AppUserClient<$Result.GetResult<Prisma.$AppUserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more AppUsers that matches the filter.
+     * @param {AppUserFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const appUser = await prisma.appUser.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: AppUserFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a AppUser.
+     * @param {AppUserAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const appUser = await prisma.appUser.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: AppUserAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of AppUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserCountArgs} args - Arguments to filter AppUsers to count.
+     * @example
+     * // Count the number of AppUsers
+     * const count = await prisma.appUser.count({
+     *   where: {
+     *     // ... the filter for the AppUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends AppUserCountArgs>(
+      args?: Subset<T, AppUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AppUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AppUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AppUserAggregateArgs>(args: Subset<T, AppUserAggregateArgs>): Prisma.PrismaPromise<GetAppUserAggregateType<T>>
+
+    /**
+     * Group by AppUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AppUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AppUserGroupByArgs['orderBy'] }
+        : { orderBy?: AppUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AppUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAppUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AppUser model
+   */
+  readonly fields: AppUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AppUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AppUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the AppUser model
+   */ 
+  interface AppUserFieldRefs {
+    readonly id: FieldRef<"AppUser", 'String'>
+    readonly name: FieldRef<"AppUser", 'String'>
+    readonly email: FieldRef<"AppUser", 'String'>
+    readonly image: FieldRef<"AppUser", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * AppUser findUnique
+   */
+  export type AppUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter, which AppUser to fetch.
+     */
+    where: AppUserWhereUniqueInput
+  }
+
+
+  /**
+   * AppUser findUniqueOrThrow
+   */
+  export type AppUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter, which AppUser to fetch.
+     */
+    where: AppUserWhereUniqueInput
+  }
+
+
+  /**
+   * AppUser findFirst
+   */
+  export type AppUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter, which AppUser to fetch.
+     */
+    where?: AppUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppUsers to fetch.
+     */
+    orderBy?: AppUserOrderByWithRelationInput | AppUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppUsers.
+     */
+    cursor?: AppUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppUsers.
+     */
+    distinct?: AppUserScalarFieldEnum | AppUserScalarFieldEnum[]
+  }
+
+
+  /**
+   * AppUser findFirstOrThrow
+   */
+  export type AppUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter, which AppUser to fetch.
+     */
+    where?: AppUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppUsers to fetch.
+     */
+    orderBy?: AppUserOrderByWithRelationInput | AppUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppUsers.
+     */
+    cursor?: AppUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppUsers.
+     */
+    distinct?: AppUserScalarFieldEnum | AppUserScalarFieldEnum[]
+  }
+
+
+  /**
+   * AppUser findMany
+   */
+  export type AppUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter, which AppUsers to fetch.
+     */
+    where?: AppUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppUsers to fetch.
+     */
+    orderBy?: AppUserOrderByWithRelationInput | AppUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AppUsers.
+     */
+    cursor?: AppUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppUsers.
+     */
+    skip?: number
+    distinct?: AppUserScalarFieldEnum | AppUserScalarFieldEnum[]
+  }
+
+
+  /**
+   * AppUser create
+   */
+  export type AppUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * The data needed to create a AppUser.
+     */
+    data: XOR<AppUserCreateInput, AppUserUncheckedCreateInput>
+  }
+
+
+  /**
+   * AppUser createMany
+   */
+  export type AppUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AppUsers.
+     */
+    data: AppUserCreateManyInput | AppUserCreateManyInput[]
+  }
+
+
+  /**
+   * AppUser update
+   */
+  export type AppUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * The data needed to update a AppUser.
+     */
+    data: XOR<AppUserUpdateInput, AppUserUncheckedUpdateInput>
+    /**
+     * Choose, which AppUser to update.
+     */
+    where: AppUserWhereUniqueInput
+  }
+
+
+  /**
+   * AppUser updateMany
+   */
+  export type AppUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AppUsers.
+     */
+    data: XOR<AppUserUpdateManyMutationInput, AppUserUncheckedUpdateManyInput>
+    /**
+     * Filter which AppUsers to update
+     */
+    where?: AppUserWhereInput
+  }
+
+
+  /**
+   * AppUser upsert
+   */
+  export type AppUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * The filter to search for the AppUser to update in case it exists.
+     */
+    where: AppUserWhereUniqueInput
+    /**
+     * In case the AppUser found by the `where` argument doesn't exist, create a new AppUser with this data.
+     */
+    create: XOR<AppUserCreateInput, AppUserUncheckedCreateInput>
+    /**
+     * In case the AppUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AppUserUpdateInput, AppUserUncheckedUpdateInput>
+  }
+
+
+  /**
+   * AppUser delete
+   */
+  export type AppUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+    /**
+     * Filter which AppUser to delete.
+     */
+    where: AppUserWhereUniqueInput
+  }
+
+
+  /**
+   * AppUser deleteMany
+   */
+  export type AppUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppUsers to delete
+     */
+    where?: AppUserWhereInput
+  }
+
+
+  /**
+   * AppUser findRaw
+   */
+  export type AppUserFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * AppUser aggregateRaw
+   */
+  export type AppUserAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * AppUser without action
+   */
+  export type AppUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppUser
+     */
+    select?: AppUserSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -1735,6 +2740,16 @@ export namespace Prisma {
   };
 
   export type ExampleScalarFieldEnum = (typeof ExampleScalarFieldEnum)[keyof typeof ExampleScalarFieldEnum]
+
+
+  export const AppUserScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    image: 'image'
+  };
+
+  export type AppUserScalarFieldEnum = (typeof AppUserScalarFieldEnum)[keyof typeof AppUserScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1831,6 +2846,53 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Example"> | string
   }
 
+  export type AppUserWhereInput = {
+    AND?: AppUserWhereInput | AppUserWhereInput[]
+    OR?: AppUserWhereInput[]
+    NOT?: AppUserWhereInput | AppUserWhereInput[]
+    id?: StringFilter<"AppUser"> | string
+    name?: StringFilter<"AppUser"> | string
+    email?: StringFilter<"AppUser"> | string
+    image?: StringNullableFilter<"AppUser"> | string | null
+  }
+
+  export type AppUserOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type AppUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: AppUserWhereInput | AppUserWhereInput[]
+    OR?: AppUserWhereInput[]
+    NOT?: AppUserWhereInput | AppUserWhereInput[]
+    name?: StringFilter<"AppUser"> | string
+    image?: StringNullableFilter<"AppUser"> | string | null
+  }, "id" | "email">
+
+  export type AppUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    _count?: AppUserCountOrderByAggregateInput
+    _max?: AppUserMaxOrderByAggregateInput
+    _min?: AppUserMinOrderByAggregateInput
+  }
+
+  export type AppUserScalarWhereWithAggregatesInput = {
+    AND?: AppUserScalarWhereWithAggregatesInput | AppUserScalarWhereWithAggregatesInput[]
+    OR?: AppUserScalarWhereWithAggregatesInput[]
+    NOT?: AppUserScalarWhereWithAggregatesInput | AppUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AppUser"> | string
+    name?: StringWithAggregatesFilter<"AppUser"> | string
+    email?: StringWithAggregatesFilter<"AppUser"> | string
+    image?: StringNullableWithAggregatesFilter<"AppUser"> | string | null
+  }
+
   export type ExampleCreateInput = {
     id?: string
     name: string
@@ -1867,6 +2929,51 @@ export namespace Prisma {
   export type ExampleUncheckedUpdateManyInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AppUserCreateInput = {
+    id?: string
+    name: string
+    email: string
+    image?: string | null
+  }
+
+  export type AppUserUncheckedCreateInput = {
+    id?: string
+    name: string
+    email: string
+    image?: string | null
+  }
+
+  export type AppUserUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AppUserUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AppUserCreateManyInput = {
+    id?: string
+    name: string
+    email: string
+    image?: string | null
+  }
+
+  export type AppUserUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AppUserUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1920,8 +3027,69 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
+  }
+
+  export type AppUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type AppUserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type AppUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+    unset?: boolean
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -1966,6 +3134,51 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
 
 
   /**
@@ -1975,6 +3188,10 @@ export namespace Prisma {
      * @deprecated Use ExampleDefaultArgs instead
      */
     export type ExampleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ExampleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AppUserDefaultArgs instead
+     */
+    export type AppUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AppUserDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

@@ -106,6 +106,13 @@ exports.Prisma.ExampleScalarFieldEnum = {
   email: 'email'
 };
 
+exports.Prisma.AppUserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  image: 'image'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -118,7 +125,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Example: 'Example'
+  Example: 'Example',
+  AppUser: 'AppUser'
 };
 
 /**

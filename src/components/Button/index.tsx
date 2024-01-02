@@ -1,13 +1,34 @@
 "use client";
 
-import { deleteExamples } from "@@/lib/server";
+import { signIn, signOut } from "next-auth/react";
+import { Fragment } from "react";
 
-const cx = "p-2 rounded border cursor-pointer";
+const cx = "text-black bg-white py-1 px-2 m-2 rounded cursor-pointer";
 
-export const DeleteExamplesButton = ({ hidden }: { hidden?: boolean }) => (
-  <form action={deleteExamples} className='text-center'>
-    <button type='submit' className={cx + (hidden && " hidden")}>
-      Delete Examples
+export const AuthButton = ({ user }: { user: any }) => {
+  console.log({ user });
+  return user ? (
+    <Fragment>
+      Signed in as {user.email ?? "..."}
+      <button
+        type='button'
+        className={cx}
+        onClick={() => {
+          console.log("signOut");
+          signOut();
+        }}>
+        Sign Out
+      </button>
+    </Fragment>
+  ) : (
+    <button
+      type='button'
+      className={cx}
+      onClick={() => {
+        console.log("signIn");
+        signIn("google");
+      }}>
+      Sign In
     </button>
-  </form>
-);
+  );
+};

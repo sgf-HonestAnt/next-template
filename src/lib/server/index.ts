@@ -1,5 +1,5 @@
 "use server";
-import prisma from "@@/prisma";
+import prisma from "@@/lib/client";
 import { redirect } from "next/navigation";
 
 export async function createExample(formData: FormData) {

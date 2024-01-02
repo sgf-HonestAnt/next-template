@@ -1,8 +1,7 @@
 "use client";
 import * as React from "react";
 import { Example } from "@@/lib/prisma/client";
-import { createExample } from "@@/lib/server";
-import { DeleteExamplesButton } from "..";
+import { createExample, deleteExamples } from "@@/lib/server";
 import { FaSpinner } from "react-icons/fa6";
 import * as z from "zod";
 
@@ -54,7 +53,6 @@ export const Data = ({ examples }: { examples: Example[] | undefined }) => {
 
   return (
     <div className='flex flex-col gap-5'>
-      <h1>Example data</h1>
       {examples?.map((d) => (
         <div key={d.id}>
           {d.email} {d.name}
@@ -98,7 +96,11 @@ export const Data = ({ examples }: { examples: Example[] | undefined }) => {
           {validating && <FaSpinner className='text-white animate-spin' />}
         </button>
       </form>
-      <DeleteExamplesButton />
+      <form action={deleteExamples} className='text-center'>
+        <button type='submit' className='p-2 rounded border cursor-pointer'>
+          Delete Examples
+        </button>
+      </form>{" "}
     </div>
   );
 };
