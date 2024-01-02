@@ -1,5 +1,5 @@
 import { Data } from "@@/components/Data";
-import prisma from "@@/lib/client";
+import prisma from "@@/prisma";
 import dayjs from "dayjs";
 
 async function getData() {

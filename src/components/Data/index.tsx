@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import { Suspense } from "react";
 import { Example } from "@@/lib/prisma/client";
 import { createExample } from "@@/lib/server";
 import { DeleteExamplesButton } from "..";
@@ -55,6 +54,7 @@ export const Data = ({ examples }: { examples: Example[] | undefined }) => {
 
   return (
     <div className='flex flex-col gap-5'>
+      <h1>Example data</h1>
       {examples?.map((d) => (
         <div key={d.id}>
           {d.email} {d.name}

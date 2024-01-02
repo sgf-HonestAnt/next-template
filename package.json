@@ -9,7 +9,9 @@
     "lint": "next lint",
     "gen:secret": "openssl rand -base64 32",
     "gen": "prisma generate --schema=./src/lib/prisma/schema.prisma",
-    "format": "prisma format --schema=./src/lib/prisma/schema.prisma"
+    "format": "prisma format --schema=./src/lib/prisma/schema.prisma",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -24,6 +26,8 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.1.2",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
