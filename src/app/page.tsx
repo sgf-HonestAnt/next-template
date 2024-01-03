@@ -66,9 +66,9 @@ export default async function Home() {
         {session?.user && <Data examples={exampleData} />}
         {!session?.user && (
           <div>
-            Found {userData?.length} user{userData?.length === 1 ? "" : "s"} and{" "}
-            {exampleData?.length} example{exampleData?.length === 1 ? "" : "s"} in
-            db
+            Found {userData?.length ?? 0} user
+            {userData?.length === 1 ? "" : "s"} and {exampleData?.length ?? 0}{" "}
+            example{exampleData?.length === 1 ? "" : "s"} in db
           </div>
         )}
       </div>
