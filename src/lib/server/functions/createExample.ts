@@ -1,7 +1,6 @@
 "use server";
 
 import prisma from "@@/lib";
-import { redirect } from "next/navigation";
 
 export async function createExample(formData: FormData) {
   "use server";
@@ -13,7 +12,6 @@ export async function createExample(formData: FormData) {
         email: form.email.toString(), //
       },
     });
-    redirect("/loading");
     return res;
   } catch (error) {
     console.error(error);
