@@ -10,7 +10,7 @@ export async function createExample(formData: FormData) {
     const res = await prisma.example.create({
       data: {
         name: form.name.toString(),
-        email: form.email.toString(),
+        email: form.email.toString(), //
       },
     });
     redirect("/loading");
