@@ -5,15 +5,23 @@ import dayjs from "dayjs";
 import prisma from "@@/lib";
 
 async function getUserData() {
-  const res = await prisma.appUser.findMany();
-  console.log("getUserData", dayjs().format("HH:mm:ss"));
-  return res;
+  try {
+    const res = await prisma.appUser.findMany();
+    console.log("getUserData", dayjs().format("HH:mm:ss"));
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getExampleData() {
-  const res = await prisma.example.findMany();
-  console.log("getExampleData", dayjs().format("HH:mm:ss"));
-  return res;
+  try {
+    const res = await prisma.example.findMany();
+    console.log("getExampleData", dayjs().format("HH:mm:ss"));
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getOrCreateUser(query: {
@@ -23,13 +31,17 @@ async function getOrCreateUser(query: {
     image: string | null;
   };
 }) {
-  let res = await prisma.appUser.findFirst(query);
-  if (!res) {
-    console.log("createUser");
-    res = await prisma.appUser.create({ data: query.where });
+  try {
+    let res = await prisma.appUser.findFirst(query);
+    if (!res) {
+      console.log("createUser");
+      res = await prisma.appUser.create({ data: query.where });
+    }
+    console.log("getUser", dayjs().format("HH:mm:ss"), res);
+    return res;
+  } catch (error) {
+    console.log(error);
   }
-  console.log("getUser", dayjs().format("HH:mm:ss"), res);
-  return res;
 }
 
 export const dynamic = "force-dynamic";
@@ -54,8 +66,8 @@ export default async function Home() {
         {session?.user && <Data examples={exampleData} />}
         {!session?.user && (
           <div>
-            Found {userData.length} user{userData.length === 1 ? "" : "s"} and{" "}
-            {exampleData.length} example{exampleData.length === 1 ? "" : "s"} in
+            Found {userData?.length} user{userData?.length === 1 ? "" : "s"} and{" "}
+            {exampleData?.length} example{exampleData?.length === 1 ? "" : "s"} in
             db
           </div>
         )}

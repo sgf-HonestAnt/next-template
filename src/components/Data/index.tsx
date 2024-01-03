@@ -3,15 +3,15 @@ import * as React from "react";
 import { FaDeleteLeft, FaSpinner } from "react-icons/fa6";
 import { createExample } from "@@/serverfunctions/createExample";
 import { deleteExample } from "@@/lib/server/functions/deleteExample";
-import { Example } from "@prisma/client";
 import * as z from "zod";
+import { Example } from "@prisma/client";
 
 type Error = {
   path: string;
   message: string;
 };
 
-export const Data = ({ examples }: { examples: Example[] }) => {
+export const Data = ({ examples }: { examples: any }) => {
   const [form, setForm] = React.useState({
     name: "",
     email: "",
@@ -58,7 +58,7 @@ export const Data = ({ examples }: { examples: Example[] }) => {
         Found {examples?.length ?? 0} example{examples?.length === 1 ? "" : "s"}{" "}
         in db
       </div>
-      {examples?.map((d) => (
+      {examples?.map((d: Example) => (
         <div key={d.id} className='flex gap-1 justify-center align-middle'>
           {d.email} {d.name}
           <form action={deleteExample}>
