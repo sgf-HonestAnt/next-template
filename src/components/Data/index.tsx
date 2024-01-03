@@ -1,8 +1,9 @@
 "use client";
 import * as React from "react";
-import { Example } from "@@/lib/prisma/client";
-import { createExample, deleteExamples } from "@@/lib/server";
-import { FaSpinner } from "react-icons/fa6";
+import { Example } from "@prisma/client";
+import { FaDeleteLeft, FaSpinner } from "react-icons/fa6";
+import { createExample } from "@@/serverfunctions/createExample";
+import { deleteExample } from "@@/lib/server/functions/deleteExample";
 import * as z from "zod";
 
 type Error = {
@@ -53,9 +54,19 @@ export const Data = ({ examples }: { examples: Example[] | undefined }) => {
 
   return (
     <div className='flex flex-col gap-5'>
+      <div className='text-center'>
+        Found {examples?.length ?? 0} example{examples?.length === 1 ? "" : "s"}{" "}
+        in db
+      </div>
       {examples?.map((d) => (
-        <div key={d.id}>
+        <div key={d.id} className='flex gap-1 justify-center align-middle'>
           {d.email} {d.name}
+          <form action={deleteExample}>
+            <input type='hidden' name='id' value={d.id} />
+            <button type='submit' title={"Delete " + d.name}>
+              <FaDeleteLeft />
+            </button>
+          </form>
         </div>
       ))}
       <form
@@ -96,11 +107,6 @@ export const Data = ({ examples }: { examples: Example[] | undefined }) => {
           {validating && <FaSpinner className='text-white animate-spin' />}
         </button>
       </form>
-      <form action={deleteExamples} className='text-center'>
-        <button type='submit' className='p-2 rounded border cursor-pointer'>
-          Delete Examples
-        </button>
-      </form>{" "}
     </div>
   );
 };
