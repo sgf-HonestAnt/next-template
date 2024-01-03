@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { Example } from "@prisma/client";
 import { FaDeleteLeft, FaSpinner } from "react-icons/fa6";
 import { createExample } from "@@/serverfunctions/createExample";
 import { deleteExample } from "@@/lib/server/functions/deleteExample";
+import { Example } from "@prisma/client";
 import * as z from "zod";
 
 type Error = {
@@ -11,7 +11,7 @@ type Error = {
   message: string;
 };
 
-export const Data = ({ examples }: { examples: Example[] | undefined }) => {
+export const Data = ({ examples }: { examples: Example[] }) => {
   const [form, setForm] = React.useState({
     name: "",
     email: "",
