@@ -70,7 +70,7 @@ export const Data = ({ examples }: { examples: any }) => {
         </div>
       ))}
       <form
-        action={createExample}
+        action={createExample} //
         className='w-64 py-3 flex flex-col align-middle gap-1'>
         <input
           type='text'
