@@ -1,8 +1,9 @@
-import { AuthButton } from "@@/components";
+import { AIButton, AuthButton } from "@@/components";
 import { Data } from "@@/components/Data";
 import { Session, getServerSession } from "next-auth";
 import dayjs from "dayjs";
 import prisma from "@@/lib";
+import { chatCompletion } from "@@/utils/openai";
 
 async function getUserData() {
   try {
@@ -61,6 +62,7 @@ export default async function Home() {
   }
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-24'>
+      <AIButton />
       <AuthButton user={session?.user} />
       <div className='my-3 flex flex-col justify-between align-center text-white bg-pink-500 p-4 rounded'>
         {session?.user && <Data examples={exampleData} />}
